@@ -1,0 +1,18 @@
+{"level":"info","message":"Webhook Catcher service running on port 3003","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.757Z"}
+{"level":"info","message":"Environment: development","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.773Z"}
+{"level":"info","message":"MongoDB URI: mongodb+srv://****:****@cluster0.87kvpgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.775Z"}
+{"level":"info","message":"Webhook retention: 30 days","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.777Z"}
+{"level":"info","message":"Rate limit: 100 requests per 900 seconds","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.789Z"}
+{"level":"info","message":"Slack notifications: disabled","service":"webhook-catcher","timestamp":"2025-05-16T13:24:55.791Z"}
+{"level":"info","message":"Webhook Catcher service running on port 3003","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.682Z"}
+{"level":"info","message":"Environment: development","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.686Z"}
+{"level":"info","message":"MongoDB URI: mongodb+srv://****:****@cluster0.87kvpgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.688Z"}
+{"level":"info","message":"Webhook retention: 30 days","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.691Z"}
+{"level":"info","message":"Rate limit: 100 requests per 900 seconds","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.693Z"}
+{"level":"info","message":"Slack notifications: disabled","service":"webhook-catcher","timestamp":"2025-05-16T13:25:12.695Z"}
+{"level":"info","message":"Webhook Catcher service running on port 3003","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.327Z"}
+{"level":"info","message":"Environment: development","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.331Z"}
+{"level":"info","message":"MongoDB URI: mongodb+srv://****:****@cluster0.87kvpgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.333Z"}
+{"level":"info","message":"Webhook retention: 30 days","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.334Z"}
+{"level":"info","message":"Rate limit: 100 requests per 900 seconds","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.336Z"}
+{"level":"info","message":"Slack notifications: disabled","service":"webhook-catcher","timestamp":"2025-05-16T13:25:53.338Z"}

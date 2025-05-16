@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  title: No-Code Service API
+  version: 1.0.0
+  description: API documentation for the No-Code service
+
+servers:
+  - url: http://localhost:3006
+    description: Local development server
+
+paths:
+  /forms:
+    post:
+      summary: Create a new form
+      tags: [Forms]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFormInput'
+      responses:
+        '201':
+          description: Form created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '400':
+          description: Bad request
+
+  /forms/{id}:
+    put:
+      summary: Update a form
+      tags: [Forms]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Form ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFormInput'
+      responses:
+        '200':
+          description: Form updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '404':
+          description: Form not found
+    get:
+      summary: Get a form
+      tags: [Forms]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Form ID
+      responses:
+        '200':
+          description: Form retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '404':
+          description: Form not found
+
+  /workflows:
+    post:
+      summary: Create a new workflow
+      tags: [Workflows]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflowInput'
+      responses:
+        '201':
+          description: Workflow created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '400':
+          description: Bad request
+
+  /workflows/{id}:
+    put:
+      summary: Update a workflow
+      tags: [Workflows]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Workflow ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkflowInput'
+      responses:
+        '200':
+          description: Workflow updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '404':
+          description: Workflow not found
+    get:
+      summary: Get a workflow
+      tags: [Workflows]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Workflow ID
+      responses:
+        '200':
+          description: Workflow retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '404':
+          description: Workflow not found
+
+components:
+  schemas:
+    CreateFormInput:
+      type: object
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+      required:
+        - name
+        - fields
+    UpdateFormInput:
+      type: object
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+    FormField:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        required:
+          type: boolean
+        options:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - type
+    Form:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateWorkflowInput:
+      type: object
+      properties:
+        name:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowTrigger'
+      required:
+        - name
+        - steps
+        - triggers
+    UpdateWorkflowInput:
+      type: object
+      properties:
+        name:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowTrigger'
+    WorkflowStep:
+      type: object
+      properties:
+        name:
+          type: string
+        action:
+          type: string
+        config:
+          type: object
+      required:
+        - name
+        - action
+        - config
+    WorkflowTrigger:
+      type: object
+      properties:
+        type:
+          type: string
+        config:
+          type: object
+      required:
+        - type
+        - config
+    Workflow:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowTrigger'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time 

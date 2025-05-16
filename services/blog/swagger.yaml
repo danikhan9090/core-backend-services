@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title: Blog Service API
+  version: 1.0.0
+  description: API documentation for the blog service
+
+servers:
+  - url: http://localhost:3004
+    description: Local development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your JWT token in the format: Bearer <token>'
+
+  schemas:
+    CreatePostInput:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - title
+        - content
+    UpdatePostInput:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+    Post:
+      type: object
+      properties:
+        _id:
+          type: string
+        author:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        isDeleted:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateCommentInput:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+    Comment:
+      type: object
+      properties:
+        _id:
+          type: string
+        post:
+          type: string
+        author:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+paths:
+  /posts:
+    post:
+      summary: Create a new post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostInput'
+      responses:
+        '201':
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized - Authentication required
+    get:
+      summary: Get all posts with pagination
+      tags: [Posts]
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Page number
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of posts per page
+      responses:
+        '200':
+          description: List of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+
+  /posts/{id}:
+    put:
+      summary: Update a post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Post ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePostInput'
+      responses:
+        '200':
+          description: Post updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '401':
+          description: Unauthorized - Authentication required
+        '404':
+          description: Post not found
+    delete:
+      summary: Soft delete a post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Post ID
+      responses:
+        '200':
+          description: Post deleted
+        '401':
+          description: Unauthorized - Authentication required
+        '404':
+          description: Post not found
+
+  /comments/{postId}:
+    post:
+      summary: Create a comment on a post
+      tags: [Comments]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+          description: Post ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentInput'
+      responses:
+        '201':
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized - Authentication required
+    get:
+      summary: Get comments for a post
+      tags: [Comments]
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+          description: Post ID
+      responses:
+        '200':
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment' 

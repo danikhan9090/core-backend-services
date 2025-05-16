@@ -1,0 +1,56 @@
+{"level":"info","message":"Stock Price Notifier service is running on port 3002","service":"stock-price-notifier","timestamp":"2025-05-16T12:51:38.105Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:00.900Z"}
+{"level":"info","message":"Fetching stock price for AAPL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:00.908Z"}
+{"attempt":1,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"AAPL","timestamp":"2025-05-16T12:55:01.372Z"}
+{"level":"info","message":"Retrying request for AAPL (attempt 2/3)","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:01.376Z"}
+{"attempt":2,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"AAPL","timestamp":"2025-05-16T12:55:02.411Z"}
+{"level":"info","message":"Retrying request for AAPL (attempt 3/3)","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:02.424Z"}
+{"attempt":3,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"AAPL","timestamp":"2025-05-16T12:55:04.446Z"}
+{"error":{},"level":"error","message":"Error fetching stock price for AAPL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:04.452Z"}
+{"error":{},"level":"error","message":"Error checking threshold for AAPL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:04.460Z"}
+{"level":"info","message":"Fetching stock price for GOOGL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:04.466Z"}
+{"attempt":1,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"GOOGL","timestamp":"2025-05-16T12:55:04.502Z"}
+{"level":"info","message":"Retrying request for GOOGL (attempt 2/3)","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:04.509Z"}
+{"attempt":2,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"GOOGL","timestamp":"2025-05-16T12:55:05.547Z"}
+{"level":"info","message":"Retrying request for GOOGL (attempt 3/3)","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:05.574Z"}
+{"attempt":3,"error":"getaddrinfo ENOTFOUND api.example.com","level":"error","message":"Stock price request failed","service":"stock-price-notifier","symbol":"GOOGL","timestamp":"2025-05-16T12:55:07.618Z"}
+{"error":{},"level":"error","message":"Error fetching stock price for GOOGL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:07.624Z"}
+{"error":{},"level":"error","message":"Error checking threshold for GOOGL","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:07.631Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T12:55:07.636Z"}
+{"level":"info","message":"Stock Price Notifier service is running on port 3002","service":"stock-price-notifier","timestamp":"2025-05-16T13:03:51.075Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:04:00.170Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":175.84,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:04:00.288Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2750.32,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:04:00.409Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":415.32,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:04:00.536Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:04:00.652Z"}
+{"level":"info","message":"SIGINT received. Shutting down gracefully...","service":"stock-price-notifier","timestamp":"2025-05-16T13:04:03.652Z"}
+{"level":"info","message":"Stock Price Notifier service is running on port 3002","service":"stock-price-notifier","timestamp":"2025-05-16T13:04:11.087Z"}
+{"level":"info","message":"Stock Price Notifier service is running on port 3002","service":"stock-price-notifier","timestamp":"2025-05-16T13:04:56.762Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:05:00.803Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":175.84,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:05:00.921Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2750.32,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:05:01.071Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":415.32,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:05:01.284Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:05:01.396Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:06:00.321Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":174.08,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:06:00.433Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2765.73,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:06:00.549Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":413.68,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:06:00.664Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:06:00.786Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:07:00.805Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":174.01,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:07:00.912Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2780.26,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:07:01.029Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":410.14,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:07:01.146Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:07:01.262Z"}
+{"level":"info","message":"SIGINT received. Shutting down gracefully...","service":"stock-price-notifier","timestamp":"2025-05-16T13:07:37.940Z"}
+{"level":"info","message":"Stock Price Notifier service is running on port 3002","service":"stock-price-notifier","timestamp":"2025-05-16T13:07:45.238Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:08:00.725Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":175.84,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:08:00.855Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2750.32,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:08:00.990Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":415.32,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:08:01.121Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:08:01.234Z"}
+{"level":"info","message":"Starting scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:09:00.545Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":176.08,"service":"stock-price-notifier","symbol":"AAPL","threshold":150,"timestamp":"2025-05-16T13:09:00.659Z"}
+{"condition":"below","level":"info","message":"Stock price threshold alert","price":2767.48,"service":"stock-price-notifier","symbol":"GOOGL","threshold":2800,"timestamp":"2025-05-16T13:09:00.785Z"}
+{"condition":"above","level":"info","message":"Stock price threshold alert","price":419.43,"service":"stock-price-notifier","symbol":"MSFT","threshold":400,"timestamp":"2025-05-16T13:09:00.895Z"}
+{"level":"info","message":"Completed scheduled stock price check","service":"stock-price-notifier","timestamp":"2025-05-16T13:09:01.012Z"}
+{"level":"info","message":"SIGINT received. Shutting down gracefully...","service":"stock-price-notifier","timestamp":"2025-05-16T13:09:42.291Z"}

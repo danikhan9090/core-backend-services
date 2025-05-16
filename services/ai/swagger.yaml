@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: AI Service API
+  version: 1.0.0
+  description: API documentation for the AI service
+
+servers:
+  - url: http://localhost:3005
+    description: Local development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your JWT token in the format: Bearer <token>'
+
+  schemas:
+    GenerateCompletionInput:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt for text generation
+      required:
+        - prompt
+    GenerateCompletionResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          description: The generated text
+    GenerateImageInput:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt for image generation
+      required:
+        - prompt
+    GenerateImageResponse:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+          description: The URL of the generated image
+
+paths:
+  /ai/completion:
+    post:
+      summary: Generate text completion
+      tags: [AI]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateCompletionInput'
+      responses:
+        '200':
+          description: Text generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateCompletionResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized - Authentication required
+
+  /ai/image:
+    post:
+      summary: Generate image
+      tags: [AI]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateImageInput'
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateImageResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized - Authentication required 

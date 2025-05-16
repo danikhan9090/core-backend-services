@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs\\.f6caf3f764935de304d607387b18add8187c0fe0-audit.json",
+    "files": [
+        {
+            "date": 1747399897733,
+            "name": "logs\\stock-price-notifier-2025-05-16.log",
+            "hash": "907674240ada48ceabbe3f70b4c7754658ed957536590efcc7107e3453b8c6b4"
+        }
+    ],
+    "hashType": "sha256"
+}
