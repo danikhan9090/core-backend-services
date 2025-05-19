@@ -34,6 +34,8 @@ interface TaskData {
   description: string;
   dueDate: string;
   priority: 'low' | 'medium' | 'high';
+  status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
+  assignedTo: string;
 }
 
 const TaskManagement: React.FC = () => {
@@ -47,16 +49,19 @@ const TaskManagement: React.FC = () => {
     title: '',
     description: '',
     dueDate: '',
-    priority: 'medium'
+    priority: 'medium',
+    status: 'pending',
+    assignedTo: 'current-user' // You might want to get this from your auth context
   });
 
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3006/tasks');
-      setTasks(response.data);
+      const response = await axios.get('http://localhost:3006/api/tasks');
+      setTasks(response.data.tasks || []);
     } catch (err) {
       setError('Failed to fetch tasks');
+      setTasks([]);
     } finally {
       setLoading(false);
     }
@@ -70,15 +75,15 @@ const TaskManagement: React.FC = () => {
     try {
       setLoading(true);
       if (editingTask) {
-        await axios.put(`http://localhost:3006/tasks/${editingTask._id}`, taskData);
+        await axios.put(`http://localhost:3006/api/tasks/${editingTask._id}`, taskData);
         setSuccess('Task updated successfully');
       } else {
-        await axios.post('http://localhost:3006/tasks', taskData);
+        await axios.post('http://localhost:3006/api/tasks', taskData);
         setSuccess('Task created successfully');
       }
       setOpenDialog(false);
       setEditingTask(null);
-      setTaskData({ title: '', description: '', dueDate: '', priority: 'medium' });
+      setTaskData({ title: '', description: '', dueDate: '', priority: 'medium', status: 'pending', assignedTo: 'current-user' });
       fetchTasks();
     } catch (err) {
       setError('Failed to save task');
@@ -89,7 +94,7 @@ const TaskManagement: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3006/tasks/${id}`);
+      await axios.delete(`http://localhost:3006/api/tasks/${id}`);
       setSuccess('Task deleted successfully');
       fetchTasks();
     } catch (err) {
@@ -103,14 +108,16 @@ const TaskManagement: React.FC = () => {
       title: task.title,
       description: task.description,
       dueDate: task.dueDate,
-      priority: task.priority
+      priority: task.priority,
+      status: task.status,
+      assignedTo: 'current-user'
     });
     setOpenDialog(true);
   };
 
   const handleStatusChange = async (task: Task) => {
     try {
-      await axios.put(`http://localhost:3006/tasks/${task._id}`, {
+      await axios.put(`http://localhost:3006/api/tasks/${task._id}`, {
         ...task,
         status: task.status === 'completed' ? 'pending' : 'completed'
       });
@@ -234,6 +241,27 @@ const TaskManagement: React.FC = () => {
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </TextField>
+          <TextField
+            fullWidth
+            select
+            label="Status"
+            value={taskData.status}
+            onChange={(e) => setTaskData({ ...taskData, status: e.target.value as 'pending' | 'in_progress' | 'completed' | 'cancelled' })}
+            margin="normal"
+            SelectProps={{ native: true }}
+          >
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </TextField>
+          <TextField
+            fullWidth
+            label="Assigned To"
+            value={taskData.assignedTo}
+            onChange={(e) => setTaskData({ ...taskData, assignedTo: e.target.value })}
+            margin="normal"
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancel</Button>

@@ -14,6 +14,11 @@
             "date": 1747663896683,
             "name": "logs\\task-management-2025-05-19.log",
             "hash": "c1cf5d52140916c9cc561ebf0dfd3b56c69f13c9c5f356b9a532f95491216441"
+        },
+        {
+            "date": 1747681447752,
+            "name": "logs\\task-management-2025-05-20.log",
+            "hash": "44f1df1f1377eb5261fa673cd93be8092859efe63b6976453c94a10cee0f2324"
         }
     ],
     "hashType": "sha256"
