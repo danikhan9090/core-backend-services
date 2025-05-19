@@ -39,10 +39,11 @@ const WebhookCatcher: React.FC = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get('http://localhost:3003/webhooks');
-      setWebhooks(response.data);
+      setWebhooks(response.data.webhooks || []);
     } catch (err) {
       setError('Failed to fetch webhooks');
       console.error('Error fetching webhooks:', err);
+      setWebhooks([]);
     } finally {
       setLoading(false);
     }

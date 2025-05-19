@@ -9,6 +9,7 @@ import config from './config';
 import { WebhookService } from './services/webhook';
 import { SlackService } from './services/slack';
 import { WebhookError } from './utils/errors';
+import { stream } from './config/logger';
 
 // Create Express app
 const app = express();
@@ -22,8 +23,9 @@ connectDB().catch(err => {
 // Middleware
 app.use(helmet());
 app.use(cors());
+app.use(morgan('combined', { stream }));
 app.use(express.json({ limit: config.webhook.maxPayloadSize }));
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
+app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -36,6 +38,10 @@ app.use(limiter);
 // Routes
 app.post('/webhook', async (req, res) => {
   try {
+    if (!config.webhook.allowedMethods.includes(req.method)) {
+      throw new WebhookError(`Method ${req.method} not allowed. Allowed methods: ${config.webhook.allowedMethods.join(', ')}`);
+    }
+
     const webhook = await WebhookService.storeWebhook(req);
     
     // Send Slack notification if enabled

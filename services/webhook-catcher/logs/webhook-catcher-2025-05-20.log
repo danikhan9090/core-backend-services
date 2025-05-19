@@ -1,0 +1,6 @@
+{"level":"info","message":"Webhook Catcher service running on port 3003","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.709Z"}
+{"level":"info","message":"Environment: development","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.718Z"}
+{"level":"info","message":"MongoDB URI: mongodb+srv://****:****@cluster0.87kvpgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.730Z"}
+{"level":"info","message":"Webhook retention: 30 days","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.733Z"}
+{"level":"info","message":"Rate limit: 100 requests per 900 seconds","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.736Z"}
+{"level":"info","message":"Slack notifications: disabled","service":"webhook-catcher","timestamp":"2025-05-19T19:22:01.738Z"}
