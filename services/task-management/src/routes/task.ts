@@ -6,7 +6,6 @@ import {
   updateTask,
   deleteTask,
 } from '../controllers/taskController';
-import { authenticate } from '@backend-services/shared';
 import { validateRequest } from '../middleware/validateRequest';
 import {
   createTaskSchema,
@@ -17,9 +16,6 @@ import {
 } from '../validations/task';
 
 const router = Router();
-
-// All routes require authentication
-router.use(authenticate);
 
 // Task routes
 router.post('/', validateRequest(createTaskSchema), createTask);

@@ -1,8 +1,4 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import { logger } from '../utils/logger';
-import config from '../config';
-
-const { priorityLevels, statusOptions } = config.task;
 
 export interface ITask extends Document {
   title: string;
@@ -11,14 +7,7 @@ export interface ITask extends Document {
   status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
   dueDate: Date;
   assignedTo: string;
-  createdBy: string;
   tags: string[];
-  attachments: string[];
-  comments: Array<{
-    text: string;
-    createdBy: string;
-    createdAt: Date;
-  }>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -43,16 +32,16 @@ const taskSchema = new Schema<ITask>(
       type: String,
       required: [true, 'Priority is required'],
       enum: {
-        values: priorityLevels.split(','),
-        message: `Priority must be one of: ${priorityLevels}`
+        values: ['low', 'medium', 'high'],
+        message: 'Priority must be one of: low, medium, high'
       }
     },
     status: {
       type: String,
       required: [true, 'Status is required'],
       enum: {
-        values: statusOptions.split(','),
-        message: `Status must be one of: ${statusOptions}`
+        values: ['pending', 'in_progress', 'completed', 'cancelled'],
+        message: 'Status must be one of: pending, in_progress, completed, cancelled'
       },
       default: 'pending'
     },
@@ -71,32 +60,9 @@ const taskSchema = new Schema<ITask>(
       required: [true, 'Assignee is required'],
       trim: true
     },
-    createdBy: {
-      type: String,
-      required: [true, 'Creator is required'],
-      trim: true
-    },
     tags: [{
       type: String,
       trim: true
-    }],
-    attachments: [{
-      type: String
-    }],
-    comments: [{
-      text: {
-        type: String,
-        required: true,
-        trim: true
-      },
-      createdBy: {
-        type: String,
-        required: true
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now
-      }
     }]
   },
   {
@@ -109,33 +75,5 @@ taskSchema.index({ title: 'text', description: 'text' });
 taskSchema.index({ priority: 1, status: 1 });
 taskSchema.index({ dueDate: 1 });
 taskSchema.index({ assignedTo: 1 });
-taskSchema.index({ createdBy: 1 });
-
-// Pre-save middleware
-taskSchema.pre('save', function(next) {
-  // Log task creation/update
-  logger.info(`Task ${this.isNew ? 'created' : 'updated'}`, {
-    taskId: this._id,
-    title: this.title,
-    status: this.status,
-    assignedTo: this.assignedTo
-  });
-  next();
-});
-
-// Static method to check task limit per user
-taskSchema.statics.checkUserTaskLimit = async function(userId: string): Promise<boolean> {
-  const maxTasks = config.task.maxTasksPerUser;
-  const taskCount = await this.countDocuments({ createdBy: userId });
-  return taskCount < maxTasks;
-};
-
-// Method to check if task is expired
-taskSchema.methods.isExpired = function(): boolean {
-  const expiryDays = config.task.expiryDays;
-  const expiryDate = new Date(this.dueDate);
-  expiryDate.setDate(expiryDate.getDate() + expiryDays);
-  return new Date() > expiryDate;
-};
 
 export const Task = mongoose.model<ITask>('Task', taskSchema); 

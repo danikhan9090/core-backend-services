@@ -11,12 +11,8 @@ const taskBaseSchema = z.object({
     .max(100, 'Title cannot exceed 100 characters'),
   description: z.string()
     .min(10, 'Description must be at least 10 characters long'),
-  priority: z.enum(['low', 'medium', 'high'] as const, {
-    errorMap: () => ({ message: `Priority must be one of: ${priorityLevels}` })
-  }),
-  status: z.enum(['pending', 'in_progress', 'completed', 'cancelled'] as const, {
-    errorMap: () => ({ message: `Status must be one of: ${statusOptions}` })
-  }),
+  priority: z.enum(['low', 'medium', 'high'] as const),
+  status: z.enum(['pending', 'in_progress', 'completed', 'cancelled'] as const),
   dueDate: z.string()
     .transform((str) => new Date(str))
     .refine((date) => date > new Date(), {
@@ -34,39 +30,36 @@ export const createTaskSchema = z.object({
 
 // Update task schema
 export const updateTaskSchema = z.object({
-  params: z.object({
-    taskId: z.string().min(1, 'Task ID is required')
-  }),
   body: taskBaseSchema.partial()
 });
 
 // Get task schema
 export const getTaskSchema = z.object({
   params: z.object({
-    taskId: z.string().min(1, 'Task ID is required')
+    id: z.string().min(1, 'Task ID is required')
   })
 });
 
 // Delete task schema
 export const deleteTaskSchema = z.object({
   params: z.object({
-    taskId: z.string().min(1, 'Task ID is required')
+    id: z.string().min(1, 'Task ID is required')
   })
 });
 
-// List tasks schema
+// List tasks schema - make all query parameters optional
 export const listTasksSchema = z.object({
   query: z.object({
-    page: z.string().regex(/^\d+$/).transform(Number).default('1'),
-    limit: z.string().regex(/^\d+$/).transform(Number).default('10'),
+    page: z.string().regex(/^\d+$/).transform(Number).default('1').optional(),
+    limit: z.string().regex(/^\d+$/).transform(Number).default('10').optional(),
     status: z.enum(['pending', 'in_progress', 'completed', 'cancelled'] as const).optional(),
     priority: z.enum(['low', 'medium', 'high'] as const).optional(),
     assignedTo: z.string().optional(),
     createdBy: z.string().optional(),
-    sortBy: z.enum(['dueDate', 'priority', 'status', 'createdAt']).default('dueDate'),
-    sortOrder: z.enum(['asc', 'desc']).default('asc'),
+    sortBy: z.enum(['dueDate', 'priority', 'status', 'createdAt']).default('dueDate').optional(),
+    sortOrder: z.enum(['asc', 'desc']).default('asc').optional(),
     search: z.string().optional()
-  })
+  }).optional()
 });
 
 // Add comment schema
